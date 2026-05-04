@@ -78,11 +78,10 @@ Pipeline sẽ tự động chạy 8 bước:
 
 ## Sau khi chạy xong
 
-|                     | URL                         |
-| ------------------- | --------------------------- |
-| Pinot UI            | http://localhost:9000       |
-| Pinot Query Console | http://localhost:9000/query |
-| Spark UI            | http://localhost:8080       |
+|                     | URL                           |
+| ------------------- | ----------------------------- |
+| Pinot UI            | http://localhost:9000         |
+| Pinot Query Console | http://localhost:9000/#/query |
 
 ---
 
