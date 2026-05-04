@@ -6,7 +6,7 @@ Pipeline phân tích dữ liệu taxi NYC sử dụng Apache Spark (ETL) + Apach
 
 ## Yêu cầu
 
-- [Docker Desktop](https://www.docker.com/products/docker-desktop/) đang chạy
+- [Docker Desktop](https://www.docker.com/products/docker-desktop/)
 - Python 3.8+
 - File CSV dataset (xem hướng dẫn bên dưới)
 
@@ -39,7 +39,7 @@ pinot-spark-demo/
 mkdir data
 ```
 
-**Bước 2 — Tải dataset thủ công:**
+**Bước 2 — Tải dataset:**
 
 1. Truy cập: https://www.kaggle.com/datasets/elemento/nyc-yellow-taxi-trip-data
 2. Đăng nhập Kaggle (hoặc tạo tài khoản miễn phí)
@@ -63,26 +63,26 @@ python run.py
 
 Pipeline sẽ tự động chạy 8 bước:
 
-| Bước | Mô tả |
-|------|-------|
-| 1/8 | Kiểm tra môi trường (Docker, dataset, config) |
-| 2/8 | Khởi động cụm Docker (Zookeeper, Pinot, Spark) |
-| 3/8 | Chờ Broker & Server đăng ký, tag vào DefaultTenant |
-| 4/8 | Đăng ký Schema lên Pinot |
-| 5/8 | Đăng ký Table Config lên Pinot |
-| 6/8 | Chạy Spark ETL (có thể mất 5–10 phút) |
-| 7/8 | Nạp dữ liệu Parquet vào Pinot |
-| 8/8 | Kiểm tra kết quả |
+| Bước | Mô tả                                              |
+| ---- | -------------------------------------------------- |
+| 1/8  | Kiểm tra môi trường (Docker, dataset, config)      |
+| 2/8  | Khởi động cụm Docker (Zookeeper, Pinot, Spark)     |
+| 3/8  | Chờ Broker & Server đăng ký, tag vào DefaultTenant |
+| 4/8  | Đăng ký Schema lên Pinot                           |
+| 5/8  | Đăng ký Table Config lên Pinot                     |
+| 6/8  | Chạy Spark ETL (có thể mất 5–10 phút)              |
+| 7/8  | Nạp dữ liệu Parquet vào Pinot                      |
+| 8/8  | Kiểm tra kết quả                                   |
 
 ---
 
 ## Sau khi chạy xong
 
-| | URL |
-|-|-----|
-| Pinot UI | http://localhost:9000 |
+|                     | URL                         |
+| ------------------- | --------------------------- |
+| Pinot UI            | http://localhost:9000       |
 | Pinot Query Console | http://localhost:9000/query |
-| Spark UI | http://localhost:8080 |
+| Spark UI            | http://localhost:8080       |
 
 ---
 
