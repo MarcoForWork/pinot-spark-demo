@@ -31,7 +31,7 @@ pinot-spark-demo/
 
 ---
 
-## Cách tạo folder và thêm file CSV
+## Cách tạo folder và thêm dataset
 
 **Bước 1 — Tạo folder `data`:**
 
@@ -39,32 +39,19 @@ pinot-spark-demo/
 mkdir data
 ```
 
-**Bước 2 — Tải dataset:**
+**Bước 2 — Tải dataset thủ công:**
 
-Tải file `yellow_tripdata_2016-03.csv` (~1.9 GB) từ trang NYC TLC:
-
-```
-https://www.nyc.gov/site/tlc/about/tlc-trip-record-data.page
-```
-
-Hoặc dùng wget/curl:
-
-```bash
-# Linux / macOS
-wget -P data/ https://d37ci6vzurychx.cloudfront.net/trip-data/yellow_tripdata_2016-03.csv
-
-# Windows (PowerShell)
-Invoke-WebRequest -Uri "https://d37ci6vzurychx.cloudfront.net/trip-data/yellow_tripdata_2016-03.csv" -OutFile "data\yellow_tripdata_2016-03.csv"
-```
-
-**Bước 3 — Kiểm tra lại:**
+1. Truy cập: https://www.kaggle.com/datasets/elemento/nyc-yellow-taxi-trip-data
+2. Đăng nhập Kaggle (hoặc tạo tài khoản miễn phí)
+3. Click nút **Download** để tải file ZIP về máy
+4. Giải nén, lấy file `yellow_tripdata_2016-03.csv`
+5. Đặt file vào folder `data/`:
 
 ```
-data/
-└── yellow_tripdata_2016-03.csv   ✅ (~1.9 GB)
+pinot-spark-demo/
+└── data/
+    └── yellow_tripdata_2016-03.csv   ✅
 ```
-
-> Folder `data/` đã được thêm vào `.gitignore`, sẽ không bị commit lên repo.
 
 ---
 
