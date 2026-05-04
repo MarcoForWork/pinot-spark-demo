@@ -1,0 +1,30 @@
+{
+  "schemaName": "nyc_taxi",
+  "dimensionFieldSpecs": [
+    { "name": "VendorID", "dataType": "INT" },
+    { "name": "passenger_count", "dataType": "INT" },
+    { "name": "payment_type", "dataType": "INT" },
+    { "name": "RatecodeID", "dataType": "INT" },
+    { "name": "store_and_fwd_flag", "dataType": "STRING" },
+    { "name": "pickup_hour", "dataType": "INT" },
+    { "name": "pickup_dayofweek", "dataType": "INT" }
+  ],
+  "metricFieldSpecs": [
+    { "name": "trip_distance", "dataType": "FLOAT" },
+    { "name": "fare_amount", "dataType": "FLOAT" },
+    { "name": "tip_amount", "dataType": "FLOAT" },
+    { "name": "tolls_amount", "dataType": "FLOAT" },
+    { "name": "total_amount", "dataType": "FLOAT" },
+    { "name": "extra", "dataType": "FLOAT" },
+    { "name": "mta_tax", "dataType": "FLOAT" },
+    { "name": "improvement_surcharge", "dataType": "FLOAT" }
+  ],
+  "dateTimeFieldSpecs": [
+    {
+      "name": "tpep_pickup_datetime",
+      "dataType": "TIMESTAMP",
+      "format": "1:MILLISECONDS:EPOCH",
+      "granularity": "1:MILLISECONDS"
+    }
+  ]
+}

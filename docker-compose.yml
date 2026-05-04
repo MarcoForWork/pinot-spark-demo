@@ -1,0 +1,79 @@
+services:
+  zookeeper:
+    image: zookeeper:3.9
+    container_name: zookeeper
+    ports:
+      - "2181:2181"
+    networks:
+      - pinot-net
+    healthcheck:
+      test: ["CMD", "zkServer.sh", "status"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  pinot-controller:
+    image: apachepinot/pinot:1.2.0
+    container_name: pinot-controller
+    command: StartController -zkAddress zookeeper:2181
+    ports:
+      - "9000:9000"
+    depends_on:
+      zookeeper:
+        condition: service_healthy
+    networks:
+      - pinot-net
+    volumes:
+      - ./pinot-config:/opt/pinot/config
+      - ./data:/opt/pinot/data
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:9000/health || exit 1"]
+      interval: 15s
+      timeout: 10s
+      retries: 10
+      start_period: 30s
+
+  pinot-broker:
+    image: apachepinot/pinot:1.2.0
+    container_name: pinot-broker
+    command: StartBroker -zkAddress zookeeper:2181
+    ports:
+      - "8099:8099"
+    depends_on:
+      pinot-controller:
+        condition: service_healthy
+    networks:
+      - pinot-net
+    restart: on-failure
+
+  pinot-server:
+    image: apachepinot/pinot:1.2.0
+    container_name: pinot-server
+    command: StartServer -zkAddress zookeeper:2181
+    ports:
+      - "8098:8098"
+    depends_on:
+      pinot-controller:
+        condition: service_healthy
+    networks:
+      - pinot-net
+    volumes:
+      - ./data:/opt/pinot/data
+    restart: on-failure
+
+  spark:
+      image: apache/spark:3.5.1
+      container_name: spark-master
+      command: ["tail", "-f", "/dev/null"]
+      ports:
+        - "8080:8080"
+        - "7077:7077"
+      networks:
+        - pinot-net
+      volumes:
+        - ./data:/opt/spark/data
+        - ./spark-jobs:/opt/spark/jobs
+
+networks:
+  pinot-net:
+    driver: bridge

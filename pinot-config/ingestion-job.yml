@@ -1,0 +1,34 @@
+executionFrameworkSpec:
+  name: standalone
+  segmentGenerationJobRunnerClassName: org.apache.pinot.plugin.ingestion.batch.standalone.SegmentGenerationJobRunner
+  segmentTarPushJobRunnerClassName: org.apache.pinot.plugin.ingestion.batch.standalone.SegmentTarPushJobRunner
+
+jobType: SegmentCreationAndTarPush
+
+inputDirURI: /opt/pinot/data/nyc_taxi_clean
+includeFileNamePattern: glob:**/*.parquet
+
+outputDirURI: /opt/pinot/data/nyc_taxi_segments
+
+overwriteOutput: true
+
+pushJobSpec:
+  pushAttempts: 2
+  pushRetryIntervalMillis: 1000
+  pushFileNamePattern: glob:**/*.tar.gz
+
+pinotFSSpecs:
+  - scheme: file
+    className: org.apache.pinot.spi.filesystem.LocalPinotFS
+
+recordReaderSpec:
+  dataFormat: parquet
+  className: org.apache.pinot.plugin.inputformat.parquet.ParquetRecordReader
+
+tableSpec:
+  tableName: nyc_taxi
+  schemaURI: http://pinot-controller:9000/schemas/nyc_taxi
+  tableConfigURI: http://pinot-controller:9000/tables/nyc_taxi
+
+pinotClusterSpecs:
+  - controllerURI: http://pinot-controller:9000

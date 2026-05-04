@@ -1,0 +1,20 @@
+{
+  "tableName": "nyc_taxi",
+  "tableType": "OFFLINE",
+  "segmentsConfig": {
+    "replication": "1",
+    "timeColumnName": "tpep_pickup_datetime",
+    "timeType": "MILLISECONDS",
+    "segmentPushType": "APPEND",
+    "segmentAssignmentStrategy": "BalanceNumSegmentAssignmentStrategy"
+  },
+  "tableIndexConfig": {
+    "invertedIndexColumns": ["VendorID", "payment_type", "passenger_count"],
+    "loadMode": "MMAP"
+  },
+  "tenants": {
+    "broker": "DefaultTenant",
+    "server": "DefaultTenant"
+  },
+  "metadata": {}
+}
